@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+      <!-- Font Icon -->
+      <link rel="stylesheet" href="/static/fonts-signup/material-icon/css/material-design-iconic-font.min.css">
+
+      <!-- Main css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">  
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show alert1"  role="alert">
+             <strong>{{ message }}</strong>
+            <i class="zmdi zmdi-close" type="button" class="btn-close btn-cl" style="margin-left:12px ; font-size:18px;" data-bs-dismiss="alert" aria-label="Close"></i>
+           </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+       </div>
+        <div class="main">
+            <section class="sign-in">
+                <div class="container">
+                    <div class="signin-content">
+                        <div class="signin-image">
+                            <figure><img src="/static/images/safe3.png" alt="sing up image"></figure>
+                            <a href="{{ url_for('users.signup') }}" class="signup-image-link">Create an account</a>
+                        </div>
+    
+                        <div class="signin-form">
+                            <h2 class="form-title">Login</h2>
+                            <form method="POST" action="">
+                                {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.email.label(class="form-group") }}
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-group form-emailbox-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.email(class="form-group form-emailbox-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password.label(class="form-group") }}
+                                    {% if form.password.errors %}
+                                    {{ form.password(class="form-group form-passwordbox-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{ form.password(class="form-group form-passwordbox-lg") }}
+                                    {% endif %}
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div>
+                            <div class="form-group form-button">
+                                {{ form.submit(class="form-submit") }}
+                            </div>
+                        </form>
+                            <div class="social-login">
+                                <span class="social-label">Or login with</span>
+                                <ul class="socials">
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+   !-- Font Icon --
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+     Main css --
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+    <div class="main">
+        !-- Log in  Form -
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="static/images/young.jpg" alt="sing up image"></figure>
+                        <a href="{{ url_for('users.signup') }}" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Login</h2>
+                        <form method="POST" action="">
+                            {{ form.hidden_tag() }}
+                            <fieldset class="form-box">
+                                <div class="form-group-email">
+                                    {{ form.email.label(class="form-email-label") }}
+                                    {% if form.email.errors %}
+                                    {{ form.email(class="form-emailbox form-emailbox-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{ form.email(class="form-emailbox form-emailbox-lg") }}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group-password">
+                                    {{ form.password.label(class="form-password-label") }}
+                                    {% if form.password.errors %}
+                                    {{ form.password(class="form-passwordbox form-passwordbox-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{ form.password(class="form-passwordbox form-passwordbox-lg") }}
+                                    {% endif %}
+                                </div>
+                            <div class="form-group-submit">
+                                {{ form.submit(class="log-in btn-outline-info") }}
+                            </div>
+                        </form>
+                        <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>--->

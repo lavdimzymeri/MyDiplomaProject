@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+  line-height: 1.8;
+  color: #898fa1;
+  font-size: 15px;
+  font-family: 'Lato', sans-serif;
+}
+.btn-cl{
+  width: 20px;
+  height: 20px;
+  padding-left: 25px;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #11245A;
+}
+.title-sm {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+a {
+  font-weight: 700;
+  transition: all 0.4s ease;
+  text-decoration: none;
+}
+img {
+  width: 100%;
+}
+small {
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.logo-text {
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #ffffff !important;
+}
+.navbar .nav-link {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 3px;
+}
+li.nav-item:hover{
+  color: #1621c7;
+}
+.navbar-light .navbar-nav .nav-link.active {
+  color: #f1a71e;
+}
+#home {
+  background: linear-gradient(rgba(17, 36, 90, 0.8), transparent), url(/static/images/doctor.jpg);
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+}
+#home h1 {
+  font-weight: 600;
+  letter-spacing: 0.3ch;
+  text-align: left;
+}
+
+#home p {
+  letter-spacing: 0.3ch;
+  text-align: left;
+  font-size: 25px;
+}
+
+
+.section-intro  {
+  text-align: center;
+  margin-bottom: 60px;
+ 
+}
+.section-intro p{
+  font-size: 30px;
+  font-weight: 700;
+  color: #32475c;
+}
+.section-intro .hline {
+  width: 120px;
+  height: 2px;
+  background-color: rgb(224, 155, 26);
+  margin: 16px auto 0 auto;
+  margin-bottom: 40px;
+}
+
+form .form-control {
+  border-radius: 0;
+}
+form .form-control:focus {
+  box-shadow: none;
+  border-color: #f1a71e;
+}
+#cta {
+  background-color: #f1a71e;
+}
+input#submit.btn.btn-brand{
+  background-color: #f1a71e;
+}
+.row{
+  margin-bottom: 50px;
+}
+.footer-top {
+  padding-top: 80px;
+  padding-bottom: 30px;
+  background-color: #152538;
+  color: #b8bdc3;
+}
+footer .footer-links a,
+footer .social-icons a {
+  color: #b8bdc3;
+  margin: 5px;
+  text-decoration: none;
+}
+footer .social-icons a {
+  font-size: 24px;
+}
+footer .footer-links a {
+  display: block;
+  font-weight: 400;
+}
+footer .social-icons a:hover,
+footer .footer-links a:hover {
+  color: #067192;
+}

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='appointment.css') }}">
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css'>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+     <script src="https://kit.fontawesome.com/b6d1d8b4d8.js" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='appointment.css') }}">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='boxicons.min.css') }}">
+     <script src="https://kit.fontawesome.com/b6d1d8b4d8.js" crossorigin="anonymous"></script>
+     <script src="https://kit.fontawesome.com/e4e54a9106.js" crossorigin="anonymous"></script>
+
+     <title>
+          Appointment
+     </title>
+</head>
+
+<body data-bs-target=".navbar">
+     <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #2f537e;">
+          <div class="container">
+            <a class="navbar-brand logo-text" href="#"> <i class="fa-solid fa-laptop-medical"></i> Medica</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
+                </li>
+                 <li class="nav-item">
+                   <a class="nav-link" href="{{ url_for('main.departments') }}">Departments</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" href="{{ url_for('main.doctors') }}">Doctors</a>
+                 </li>
+                 <li class="nav-item">
+                  {% if current_user.is_authenticated %}
+                  <a class="nav-link" href="{{ url_for('main.perscriptions') }}">Perscription</a>              
+                  {% else %}
+                  <a class="nav-link" href="{{ url_for('main.about') }}"> About us</a>
+                  {% endif %}
+                </li>
+                <li class="nav-item">
+                  {% if current_user.is_authenticated %}
+                  <a class="nav-link" href="{{ url_for('main.medicalrecord') }}">Medical Record</a>
+                  {% else %}
+                  <a class="nav-link" href="{{ url_for('main.contact') }}">Contact Us</a>
+                  {% endif %}
+                </li>
+                <li class="nav-item">
+                  {% if current_user.is_authenticated %}
+                  <a class="nav-link" href="{{ url_for('users.logout') }}">Log Out</a>               
+                  {% else %}
+                  <a class="nav-link" href="{{ url_for('users.login') }}">Login  </a>
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    
+        <section id="home">
+          <div class="container text-center">
+             <div class="row justify-content-center">
+                <div class="col-md-10">
+                   <h1 class="text-white display-4">Make an Appointment</h1>
+                   <p>We are always for you !</p>
+                </div>
+             </div>
+          </div>
+       </section>
+
+       <section id="contact">
+        <h1 class=" display-4" style="font-size: 27px; color: rgb(16, 16, 65); font-weight: bold; text-align: center;">Set your date</h1>
+        <div class="container">
+           <div class="row align-items-center">
+              <div class="col-lg-4">
+                 <img src="/static/images/laptop.jpg" alt="">
+              </div>
+              <div class="col-lg-6 offset-lg-1">
+                <form method="POST" id="appointment-contact-form">
+                  {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                      {{ form.appointmentdate.label(class="mb-3") }}
+                      {% if form.appointmentdate.errors %}
+                      {{ form.appointmentdate(class="form-control form-appointmentdate-lg is-invalid") }}
+                      <div class="invalid-feedback1">
+                        {% for error in form.appointmentdate.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      {% else %}
+                      {{ form.appointmentdate(class="form-control form-appointmentdate-lg") }}
+                      {% endif %}               
+                    </div>
+                    <div class="mb-3">
+                      {{ form.doctor_id.label(class="mb-3") }}
+                      {% if form.doctor_id.errors %}
+                      {{ form.doctor_id(class="form-control form-doctor_id-lg is-invalid") }}
+                      <div class="invalid-feedback1">
+                        {% for error in form.doctor_id.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      {% else %}
+                      {{ form.doctor_id(class="form-control form-doctor_id-lg") }}
+                      {% endif %}
+                     </div>
+                     <div class="mb-3">
+                      {{ form.descriptions.label(class="mb-3") }}
+                      {% if form.descriptions.errors %}
+                      {{ form.descriptions(class="fform-control form-descriptions-lg is-invalid") }}
+                      <div class="invalid-feedback1">
+                        {% for error in form.descriptions.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                      {% else %}
+                      {{ form.descriptions(class="form-control form-descriptions-lg") }}
+                      {% endif %}
+                     </div>
+                     {{ form.submit(class="btn btn-brand") }}
+                  </form>
+                  
+              </div>
+           </div>
+        </div>
+     </section>
+
+     <div class="limiter">
+      <div class="container-table100">
+        <div class="col-12 section-intro">
+          <p>Your Appointments</p>
+          <div class="hline"></div>
+       </div>
+                    <div class="wrap-table100">
+                    <div class="table100">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                   <thead>
+                   <tr class="table100-head" id="appointments">
+                   <th class="column1">Description of Appointment</th>
+                   <th class="column2">Date of Appointment</th>
+                   <th class="column3">Manage</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                    {%for i in range (0, len)%}
+                    <td class="column1">{{AppointmentData[i].descriptions}}</td>
+                    <td class="column2">{{AppointmentData[i].appointmentdate}}</td>
+                    <td class="column3">
+                    <a class="delete" title="Delete" data-toggle="tooltip" id="{{AppointmentData[i].id}}"><i class="fa fa-trash-o"></i></a> 
+                    <a href="{{AppointmentData[i].zoom_link}}"><i class="fas fa-video"></i></a>
+                    </td>
+                   </tr>
+                    <script>
+                      $(document).on("click", ".delete", function(){
+                              $(this).parents("tr").remove();
+                              console.log("test")
+                              $(".add-new").removeAttr("disabled");
+                              var id = $(this).attr("id");
+                              var string = id;
+              
+                              $.post("/ajax_delete", { string: string}, function(data) {
+                                  $("#displaymessage").html(data);
+                                  $("#displaymessage").show();
+                              });
+                          });
+                       </script>
+                    {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-----------------------------footer-------------------------->
+<footer>
+  <div class="footer-top">
+     <div class="container">
+        <div class="row gy-5">
+           <div class="col-md-4">
+              <h4 class="" style="color: white;">Medica</h4>
+              <p style="color: #b8bdc3;">Praesent vulputate neque nec sem fermentum porttitor. Mauris eget dolor convallis, trista, dignissim sapien. Duis vel felis dictu</p>
+              <div class="social-icons"> 
+                 <a href="#"><i class="fab fa-facebook"></i></a>
+                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                 <a href="#"><i class="fab fa-instagram"></i></a>
+                 <a href="#"><i class="fab fa-twitter"></i></a>
+              </div>
+           </div>
+           <div class="col-md-2">
+              <h5 class="title-sm" style="color: white;">Navigation</h5>
+              <div class="footer-links">
+                 <a href="#">Home</a>
+                 <a href="#">Doctors</a>
+                 <a href="#">Departments</a>
+                 <a href="#">About Us</a>
+              </div>
+           </div>
+           <div class="col-md-2">
+              <h5 class="title-sm"style="color: white;">Other</h5>
+              <div class="footer-links">
+                 <a href="#">Make an appointment</a>
+                 <a href="#">Order Now!</a>
+                 <a href="#">Our Services</a>
+              </div>
+           </div>
+           <div class="col-md-2 mydivg">
+              <h5 class="title-sm" style="color: white;">Contact</h5>
+              <div class="footer-links">
+                 <p class="mb" style="color: #b8bdc3;"><i class="fas fa-thumbtack"></i> 1649 Norman Street, Los Angeles, 9001</p>
+                 <p class="mb-" style="color: #b8bdc3;"><i class="fas fa-headset"></i> 8(800)316-06-42</p>
+                 <p class="mb" style="color: #b8bdc3;"><i class="far fa-envelope"></i> medica@gmail.com</p>
+                 <p class="mb" style="color: #b8bdc3;"><i class="fas fa-clock"></i> 8:00 am - 17:00 pm, Monday-Friday</p>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</footer>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+
+
+<!--
+  <section class="container4">
+ ------------------------IMG--------------
+  <section class="container1">
+
+    <div class="create-app-form">
+
+      <form method="POST" action="" id="appointment-contact-form">
+        {{ form.hidden_tag() }}
+        <h2 class="w3-center">Appointment</h2>
+
+        <div class="w3-row w3-section">
+          <div class="large-3-columns-2">
+            {{ form.appointmentdate.label(class="form-appointmentdate-label") }}
+            {% if form.appointmentdate.errors %}
+            {{ form.appointmentdate(class="form-appointmentdate form-appointmentdate-lg is-invalid") }}
+            <div class="invalid-feedback1">
+              {% for error in form.appointmentdate.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.appointmentdate(class="form-appointmentdate form-appointmentdate-lg") }}
+            {% endif %}
+          </div>
+          <div class="large-3-columns-1">
+            {{ form.doctor_id.label(class="form-doctor_id-label") }}
+            {% if form.doctor_id.errors %}
+            {{ form.doctor_id(class="form-doctor_id form-doctor_id-lg is-invalid") }}
+            <div class="invalid-feedback1">
+              {% for error in form.doctor_id.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.doctor_id(class="form-doctor_id form-doctor_id-lg") }}
+            {% endif %}
+            <div class="large-3-columns">
+              {{ form.descriptions.label(class="form-descriptions-label") }}
+              {% if form.descriptions.errors %}
+              {{ form.descriptions(class="form-descriptions form-descriptions-lg is-invalid") }}
+              <div class="invalid-feedback1">
+                {% for error in form.descriptions.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.descriptions(class="form-descriptions form-descriptions-lg") }}
+              {% endif %}
+            </div>
+          </div>
+         - Butonin e kom qit qitu
+          <div class="form-group-submit">
+            {{ form.submit(class="signup btn-outline-info") }}
+          </div>
+          <div class="right-image">
+            <img src="/static/images/img-right.jpg">
+
+          </div>
+  </section>
+  ---------------------------------Table------------------------------------------
+
+  <section class="container2">
+    <div class="table-bg">
+    <div class="table-space">
+      
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th class="text-left">Description of Appointment</th>
+              <th class="text-left">Date of Appointment</th>
+              <th class="text-left">Manage</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content" id="appointments">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+            <tr>
+              {%for i in range (0, len)%}
+              <td class="text-left">{{AppointmentData[i].descriptions}}</td>
+              <td class="text-left">{{AppointmentData[i].appointmentdate}}</td>
+              <td class="text-left">
+                <a class="delete" title="Delete" data-toggle="tooltip" id="{{AppointmentData[i].id}}"><i class="fa fa-trash-o"></i></a> 
+                <a href="{{AppointmentData[i].zoom_link}}"><i class="fas fa-video"></i></a>
+              </td>
+            </tr>
+            <script>
+              $(document).on("click", ".delete", function(){
+                      $(this).parents("tr").remove();
+                      console.log("test")
+                      $(".add-new").removeAttr("disabled");
+                      var id = $(this).attr("id");
+                      var string = id;
+                      
+                      $.post("/ajax_delete", { string: string}, function(data) {
+                          $("#displaymessage").html(data);
+                          $("#displaymessage").show();
+                      });
+                  });
+               </script>
+            {%endfor%}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+  </section>
+  </div>
+  </section>
+</html>-->
